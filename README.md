@@ -53,6 +53,21 @@ On five simulated final-like cases (358 reads, cut 59.5 h in, target 168 h):
 the house trend baseline, consistent across seeds. A 12-hour stale tail
 before the deadline degrades it only to 0.19.
 
+## Notes and limitations
+
+- The moving-regime branch is tuned on the builder's own simulator only: the
+  practice cases are flat, so they validate the flat branch, not the moving
+  one. If real trophy curves saturate much less (or much more) than the
+  simulator assumes, the 35% growth damp and the 0.6 spread scale could be
+  off. The design is directionally principled (saturation damp, a spread
+  tighter than the baselines'), and the simulated edge over the trend
+  baseline is large, but the exact final score is unknowable until the real
+  case runs.
+- One bug was caught and fixed during validation: a hand-computed launch
+  timestamp constant was 21 hours off, silently collapsing dilution to 1.0
+  (practice loss 1.14 instead of 0.11). It is now set to 1795046400 and
+  verified against `datetime`.
+
 ## Run it
 
 ```sh
